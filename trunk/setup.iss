@@ -16,7 +16,8 @@ SetupIconFile=.\Art\icon001.ico
 Compression=lzma
 SolidCompression=yes
 WizardImageFile=.\Art\setup.bmp
-WizardSmallImageFile=.\Art\setupsmall.bmp
+WizardSmallImageFile=.\Art\setupsmall.bmp       
+LicenseFile=.\LICENSE.txt
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
