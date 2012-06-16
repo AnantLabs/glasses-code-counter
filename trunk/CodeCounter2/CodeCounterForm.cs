@@ -8,6 +8,11 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
+// CHANGES:
+// ----------------------------------------------------------------------------
+// 04/22/2011 - Scott - Fist written
+// 06/16/2012 - Scott - Code reformatted, cleaned up, and posted on Google Code
+
 namespace CodeCounter2
 {
     public partial class CodeCounterForm : Form
@@ -48,9 +53,13 @@ namespace CodeCounter2
                 endOfCodeLineChar = txtCodeChar.Text;
 
                 if (directory.Length > 75)
+                {
                     lbFolder.Text = directory.Substring(0, 75) + "...";
+                }
                 else
+                {
                     lbFolder.Text = directory;
+                }
                 lbStatus.Text = "Finding Files";
 
                 workerLoadFiles.RunWorkerAsync();
@@ -64,7 +73,7 @@ namespace CodeCounter2
                 cont = true;
                 files = Directory.GetFiles(directory, pattern, SearchOption.AllDirectories);
             }
-            catch 
+            catch
             {
                 cont = false;
                 workerLoadFiles.ReportProgress(1);
@@ -107,33 +116,41 @@ namespace CodeCounter2
                 StreamReader r = new StreamReader(new FileStream(files[i], FileMode.Open, FileAccess.Read));
 
                 string line;
-                
+
                 while ((line = r.ReadLine()) != null)
                 {
                     lines++;
                     bytes += line.Length;
 
                     if (line.Replace(" ", "").Replace("\t", "").StartsWith(commentChar))
+                    {
                         comments++;
-
+                    }
                     else if (line.Replace(" ", "").Replace("\t", "").EndsWith(")"))
+                    {
                         code++;
-
+                    }
                     else if (line.Replace(" ", "").Replace("\t", "").EndsWith("{"))
+                    {
                         code++;
-
+                    }
                     else if (line.Replace(" ", "").Replace("\t", "").EndsWith("}"))
+                    {
                         code++;
-
+                    }
                     else if (line.Contains(endOfCodeLineChar))
+                    {
                         code++;
-
+                    }
                     else if (line.Replace(" ", "").Replace("\t", "") == "")
+                    {
                         whitespace++;
-
+                    }
                     else
+                    {
                         // Assume all non-whitespace and non-comments are code.
                         code++;
+                    }
                 }
 
                 r.Close();
@@ -146,18 +163,29 @@ namespace CodeCounter2
         {
             double percent = 100.0;
             if (files.Length > 0)
+            {
                 percent = ((double)e.ProgressPercentage / (double)files.Length) * 100.0;
+            }
 
             lbProcessed.Text = e.ProgressPercentage.ToString() + "/" + files.Length.ToString() + " (" + percent.ToString("0.00") + "%)";
 
             if (endOfCodeLineChar.Length == 0)
+            {
                 lbCode.Text = "Not Specified";
+            }
             else
+            {
                 lbCode.Text = code.ToString("#,##0");
+            }
             if (commentChar.Length == 0)
+            {
                 lbComments.Text = "Not Specified";
+            }
             else
+            {
                 lbComments.Text = comments.ToString("#,##0");
+            }
+
             lbWhitespace.Text = whitespace.ToString("#,##0");
             lbLines.Text = lines.ToString("#,##0");
             lbPhySize.Text = GetSizeString(bytes);
@@ -174,13 +202,21 @@ namespace CodeCounter2
             }
             string end = "Bytes";
             if (up == 1)
+            {
                 end = "KB";
-            if (up == 2)
+            }
+            else if (up == 2)
+            {
                 end = "MB";
-            if (up == 3)
+            }
+            else if (up == 3)
+            {
                 end = "GB";
-            if (up == 4)
+            }
+            else if (up == 4)
+            {
                 end = "TB";
+            }
             return num.ToString("0.00") + " " + end;
         }
 

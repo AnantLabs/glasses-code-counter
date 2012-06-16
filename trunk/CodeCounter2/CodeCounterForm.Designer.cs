@@ -332,11 +332,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label4.Location = new System.Drawing.Point(407, 239);
+            this.label4.Location = new System.Drawing.Point(380, 239);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 13);
+            this.label4.Size = new System.Drawing.Size(124, 13);
             this.label4.TabIndex = 8;
-            this.label4.Text = "Scott Clayton 2011";
+            this.label4.Text = "Scott Clayton 2011-2012";
             // 
             // pictureBox1
             // 
